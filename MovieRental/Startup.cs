@@ -1,16 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MovieRental.Data;
+using MovieRental.Repository;
 
 namespace MovieRental
 {
@@ -30,10 +26,12 @@ namespace MovieRental
             services.AddDbContext<MovieContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("MovieRental")));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<MovieContext>();
 
             services.ConfigureApplicationCookie(opts => opts.LoginPath = "/Account/Login");
+
+            services.AddScoped<IAuctionHouseRepository, AutionHouseRepository>();
 
         }
 

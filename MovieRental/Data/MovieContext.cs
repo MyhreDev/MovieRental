@@ -4,7 +4,7 @@ using MovieRental.Models;
 
 namespace MovieRental.Data
 {
-    public class MovieContext : IdentityDbContext
+    public class MovieContext : IdentityDbContext<ApplicationUser>
     {
         public MovieContext(DbContextOptions<MovieContext> options) 
             : base(options)
